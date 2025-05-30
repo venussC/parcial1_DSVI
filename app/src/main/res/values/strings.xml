@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Parcial1</string>
+    <string name="titulo">Currency conversion</string>
+    <array name="arrmoneda">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBP</item>
+        <item>JPY</item>
+        <item>COP</item>
+
+    </array>
+
 </resources>
