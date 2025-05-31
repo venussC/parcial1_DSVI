@@ -1,5 +1,8 @@
 package com.example.parcial1;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -10,12 +13,15 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+
+import com.google.android.material.snackbar.Snackbar;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -93,8 +99,18 @@ public class MainActivity extends AppCompatActivity {
         btnconvertir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                convert2 pasar = new convert2(sporigen.getSelectedItem().toString(), spdestino.getSelectedItem().toString(), Double.parseDouble(txtconvertir.getText().toString()), tasas);
-                txtresult.setText(String.valueOf(pasar.convertidorcompleto()));
+
+                if(txtconvertir.getText().toString().equals("")) {
+                    Snackbar.make(v, getString(R.string.e_campo_vacio), Snackbar.LENGTH_LONG).show();
+
+                }else if (sporigen.getSelectedItem().toString().equals(spdestino.getSelectedItem().toString())) {
+                    Snackbar.make(v, getString(R.string.e_monedas_iguales), Snackbar.LENGTH_LONG).show();
+                } else{
+                    convert2 pasar = new convert2(sporigen.getSelectedItem().toString(), spdestino.getSelectedItem().toString(), Double.parseDouble(txtconvertir.getText().toString()), tasas);
+                    txtresult.setText(String.format("%.2f", pasar.convertidorcompleto()));
+                    cambiocolor(pasar);
+                }
+
             }
         });
 
@@ -158,5 +174,20 @@ public class MainActivity extends AppCompatActivity {
         });
 
         thread.start();
+    }
+
+
+    private void cambiocolor(convert2 pasar){
+        double resultado = pasar.convertidorcompleto();
+        if(resultado < 100){
+            txtresult.setTextColor(Color.GREEN);
+        } else if (resultado <= 1000) {
+            txtresult.setTextColor(Color.BLUE);
+        }else{
+            txtresult.setTextColor(Color.RED);
+        }
+        if (resultado > 10000){
+            Toast.makeText(MainActivity.this, getString(R.string.e_advert_monto_alto), Toast.LENGTH_SHORT).show();
+        }
     }
 }
