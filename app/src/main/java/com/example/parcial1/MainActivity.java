@@ -1,6 +1,8 @@
 package com.example.parcial1;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -15,19 +17,26 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class MainActivity extends AppCompatActivity {
 
     EditText txtconvertir;
-
     TextView txtresult;
     Button btnconvertir;
-
     Spinner sporigen, spdestino;
 
-    int posicion=0;
-
+    int posicion = 0;
     HashMap<String, Double> tasas = new HashMap<>();
     static final String API_URL = "https://api.exchangerate-api.com/v4/latest/USD";
 
@@ -42,12 +51,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        txtconvertir=findViewById(R.id.txtconvertir);
-
-        txtresult=findViewById(R.id.txtresult);
-        btnconvertir=findViewById(R.id.btnconvertir);
-        sporigen=findViewById(R.id.sporigen);
-        spdestino=findViewById(R.id.spdestino);
+        txtconvertir = findViewById(R.id.txtconvertir);
+        txtresult = findViewById(R.id.txtresult);
+        btnconvertir = findViewById(R.id.btnconvertir);
+        sporigen = findViewById(R.id.sporigen);
+        spdestino = findViewById(R.id.spdestino);
 
         tasas.put("USD", 1.0);
         tasas.put("EUR", 0.85);
@@ -55,44 +63,100 @@ public class MainActivity extends AppCompatActivity {
         tasas.put("JPY", 110.0);
         tasas.put("PAB", 1.0);
 
-        String[] arrmoneda =getResources().getStringArray(R.array.arrmoneda);
-        ArrayAdapter<String> adaptadormonedas= new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, arrmoneda);
+        String[] arrmoneda = getResources().getStringArray(R.array.arrmoneda);
+        ArrayAdapter<String> adaptadormonedas = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, arrmoneda);
         sporigen.setAdapter((adaptadormonedas));
         spdestino.setAdapter((adaptadormonedas));
 
-sporigen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
-        posicion = i;
+        sporigen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+                posicion = i;
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        spdestino.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+                posicion = i;
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
+        btnconvertir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                convert2 pasar = new convert2(sporigen.getSelectedItem().toString(), spdestino.getSelectedItem().toString(), Double.parseDouble(txtconvertir.getText().toString()), tasas);
+                txtresult.setText(String.valueOf(pasar.convertidorcompleto()));
+            }
+        });
+
+
+        obtenerTasasAPI();
     }
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+    private void obtenerTasasAPI() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(API_URL);
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                    connection.setRequestMethod("GET");
+                    connection.setConnectTimeout(5000);
+                    connection.setReadTimeout(5000);
 
-    }
+                    InputStream inputStream = connection.getInputStream();
+                    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+                    StringBuilder result = new StringBuilder();
+                    String line;
 
-});
+                    while ((line = reader.readLine()) != null) {
+                        result.append(line);
+                    }
 
-spdestino.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
-        posicion = i;
-convert2 pasar = new convert2(sporigen.getSelectedItem().toString(),spdestino.getSelectedItem().toString(),Double.parseDouble(txtconvertir.getText().toString()));
-txtresult.setText(String.valueOf(pasar.convertidorcompleto()));
+                    reader.close();
+                    inputStream.close();
+                    connection.disconnect();
 
+                    String jsonResult = result.toString();
 
-    }
+                    new Handler(Looper.getMainLooper()).post(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                JSONObject jsonResponse = new JSONObject(jsonResult);
+                                JSONObject rates = jsonResponse.getJSONObject("rates");
 
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
+                                tasas.clear();
+                                tasas.put("USD", 1.0);
 
-    }
-});
+                                Iterator<String> keys = rates.keys();
+                                while (keys.hasNext()) {
+                                    String currency = keys.next();
+                                    double rate = rates.getDouble(currency);
+                                    tasas.put(currency, rate);
+                                }
 
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
 
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-
-
+        thread.start();
     }
 }
