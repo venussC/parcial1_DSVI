@@ -1,2 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="app_name">Parcial1</string>
+    <string name="titulo">Conversion de devises</string>
+    <array name="arrmoneda">
+        <item>USD</item>
+        <item>EUR</item>
+        <item>GBP</item>
+        <item>JPY</item>
+        <item>COP</item>
+    </array>
+    <string name="hinted">Montant à convertir</string>
+    <string name="button">Convertir</string>
+    <string name="e_campo_vacio">Veuillez remplir tous les champs</string>
+    <string name="e_monedas_iguales">Les devises doivent être différentes</string>
+    <string name="e_advert_monto_alto">Avertissement : Montant élevé</string>
+</resources>

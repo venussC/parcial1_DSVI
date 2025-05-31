@@ -1,5 +1,6 @@
 package com.example.parcial1;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -8,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,7 +17,10 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.HashMap;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -42,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        //Busqueda de elementos
         txtconvertir=findViewById(R.id.txtconvertir);
 
         txtresult=findViewById(R.id.txtresult);
@@ -55,12 +61,54 @@ public class MainActivity extends AppCompatActivity {
         tasas.put("JPY", 110.0);
         tasas.put("PAB", 1.0);
 
+        //Arreglo y adaptadores
         String[] arrmoneda =getResources().getStringArray(R.array.arrmoneda);
         ArrayAdapter<String> adaptadormonedas= new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, arrmoneda);
         sporigen.setAdapter((adaptadormonedas));
         spdestino.setAdapter((adaptadormonedas));
 
-sporigen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        // validaciones y conversion
+
+        btnconvertir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String origen = sporigen.getSelectedItem().toString();
+                String destino = spdestino.getSelectedItem().toString();
+                String cantidadStr = txtconvertir.getText().toString().trim();
+
+                Double cantidad = Double.parseDouble(cantidadStr);
+
+                //Validacion de campos
+                if (cantidadStr.isEmpty()) {
+                    Snackbar.make(v, getString(R.string.e_campo_vacio), Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+
+                if (origen.equals(destino)){
+                    Snackbar.make(v, getString(R.string.e_monedas_iguales), Snackbar.LENGTH_LONG).show();
+                    return;
+                }
+
+                //Llamada a clase
+                convert2 pasar = new convert2(origen, destino, cantidad);
+                double resultado = pasar.convertidorcompleto();
+
+                //Mostar resultado en formato de 2 decimales
+                txtresult.setText(String.format(Locale.getDefault(), "%.2f", resultado));
+
+                // Color según rango
+                if (resultado < 100) txtresult.setTextColor(Color.GREEN);
+                else if (resultado <= 1000) txtresult.setTextColor(Color.BLUE);
+                else txtresult.setTextColor(Color.RED);
+
+                if (cantidad > 10000){
+                    Toast.makeText(MainActivity.this, getString(R.string.e_advert_monto_alto), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+        });
+
+/*sporigen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
         posicion = i;
@@ -88,7 +136,7 @@ txtresult.setText(String.valueOf(pasar.convertidorcompleto()));
     public void onNothingSelected(AdapterView<?> parent) {
 
     }
-});
+});*/
 
 
 
