@@ -18,17 +18,14 @@ public class convert2 {
         this.origen = origen;
         this.destino = destino;
         this.cantidad = cantidad;
-
-
-        tasas = new HashMap<>();
-        tasas.put("USD", 1.0);
-        tasas.put("EUR", 0.85);
-        tasas.put("GBP", 0.73);
-        tasas.put("JPY", 110.0);
-        tasas.put("PAB", 1.0);
     }
 
-
+    public convert2(String origen, String destino, double cantidad, HashMap<String, Double> tasasactualizadas) {
+        this.origen = origen;
+        this.destino = destino;
+        this.cantidad = cantidad;
+        this.tasas = tasasactualizadas;
+    }
 
 
     public convert2(String origen, double cantidad) {
@@ -53,5 +50,17 @@ public class convert2 {
 
 
 
+    //public void setTasas(HashMap<String, Double> nuevastasas) {
+        //this.tasas = nuevastasas;
+    //}
+
+    //public HashMap<String, Double> getTasas() {
+       // return this.tasas;
+   // }
 
 }
+
+
+
+
+

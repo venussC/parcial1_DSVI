@@ -7,7 +7,10 @@
         <item>GBP</item>
         <item>JPY</item>
         <item>COP</item>
-
     </array>
-
-</resources>
+    <string name="hinted">Amount to convert</string>
+    <string name="button">Convert</string>
+    <string name="e_campo_vacio">Please enter all fields</string>
+    <string name="e_monedas_iguales" translatable="false">Currencies must be different</string>
+    <string name="e_advert_monto_alto">Warning: High amount</string>
+    </resources>
