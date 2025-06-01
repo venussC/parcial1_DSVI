@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.os.Bundle;
+import androidx.appcompat.widget.Toolbar;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
@@ -53,6 +54,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar); // Agregas esto
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("");
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -129,30 +135,52 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        btnreiniciar = findViewById(R.id.btnreiniciar);
-
-        Button btnreiniciar = findViewById(R.id.btnreiniciar); // Asegúrate que el botón exista en el XML
-
-        btnreiniciar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Reinicia a la primera opción (posición 0)
-                sporigen.setSelection(0);
-                spdestino.setSelection(0);
-
-                // Limpia el campo de texto
-                txtconvertir.setText("");
-
-                // Limpia el resultado
-                txtresult.setText("");
-                txtresult.setTextColor(Color.BLACK);
-
-            }
-        });
-
 
 
         obtenerTasasAPI();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(android.view.Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_toolbar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(android.view.MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.action_salir) {
+            mostrarDialogoSalir();
+            return true;
+        } else if (id == R.id.action_reiniciar) {
+            reiniciarCampos();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void mostrarDialogoSalir() {
+        new AlertDialog.Builder(this)
+                .setTitle("Confirmación")
+                .setMessage("¿Estás seguro que deseas salir de la app?")
+                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        finish(); // Cierra la actividad
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    private void reiniciarCampos() {
+        txtconvertir.setText("");
+        txtresult.setText("");
+        sporigen.setSelection(0);
+        spdestino.setSelection(0);
+        ImageView imgbandera = findViewById(R.id.imageView);
+        imgbandera.setImageResource(0); // Quita bandera
     }
 
     private void obtenerTasasAPI() {

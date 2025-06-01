@@ -4,6 +4,7 @@
     <string name="titulo">Conversion de devises</string>
     <array name="arrmoneda">
         <item>USD</item>
+        <item>USD</item>
         <item>EUR</item>
         <item>GBP</item>
         <item>JPY</item>
