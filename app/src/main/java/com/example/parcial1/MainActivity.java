@@ -180,7 +180,7 @@ public class MainActivity extends AppCompatActivity {
         sporigen.setSelection(0);
         spdestino.setSelection(0);
         ImageView imgbandera = findViewById(R.id.imageView);
-        imgbandera.setImageResource(0); // Quita bandera
+        imgbandera.setImageResource(0);
     }
 
     private void obtenerTasasAPI() {
