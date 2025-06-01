@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     TextView txtresult;
     Button btnconvertir;
     Spinner sporigen, spdestino;
-
+    Button btnreiniciar;
     int posicion = 0;
     HashMap<String, Double> tasas = new HashMap<>();
     HashMap<String, Integer> banderas = new HashMap<>();
@@ -128,6 +128,28 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        btnreiniciar = findViewById(R.id.btnreiniciar);
+
+        Button btnreiniciar = findViewById(R.id.btnreiniciar); // Asegúrate que el botón exista en el XML
+
+        btnreiniciar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Reinicia a la primera opción (posición 0)
+                sporigen.setSelection(0);
+                spdestino.setSelection(0);
+
+                // Limpia el campo de texto
+                txtconvertir.setText("");
+
+                // Limpia el resultado
+                txtresult.setText("");
+                txtresult.setTextColor(Color.BLACK);
+
+            }
+        });
+
 
 
         obtenerTasasAPI();
