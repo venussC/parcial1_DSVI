@@ -71,6 +71,19 @@ public class MainActivity extends AppCompatActivity {
         sporigen = findViewById(R.id.sporigen);
         spdestino = findViewById(R.id.spdestino);
 
+        Button btn0 = findViewById(R.id.btn0);
+        Button btn1 = findViewById(R.id.btn1);
+        Button btn2 = findViewById(R.id.btn2);
+        Button btn3 = findViewById(R.id.btn3);
+        Button btn4 = findViewById(R.id.btn4);
+        Button btn5 = findViewById(R.id.btn5);
+        Button btn6 = findViewById(R.id.btn6);
+        Button btn7 = findViewById(R.id.btn7);
+        Button btn8 = findViewById(R.id.btn8);
+        Button btn9 = findViewById(R.id.btn9);
+        Button btnpunto = findViewById(R.id.btnpunto);
+        Button btnatras = findViewById(R.id.btnatras);
+
 
         banderas.put("USD", R.drawable.flag_usa);
         banderas.put("EUR", R.drawable.flag_ue);
@@ -89,6 +102,34 @@ public class MainActivity extends AppCompatActivity {
         sporigen.setAdapter((adaptadormonedas));
         spdestino.setAdapter((adaptadormonedas));
 
+        // Botones numéricos y punto
+        btn0.setOnClickListener(v -> txtconvertir.append("0"));
+        btn1.setOnClickListener(v -> txtconvertir.append("1"));
+        btn2.setOnClickListener(v -> txtconvertir.append("2"));
+        btn3.setOnClickListener(v -> txtconvertir.append("3"));
+        btn4.setOnClickListener(v -> txtconvertir.append("4"));
+        btn5.setOnClickListener(v -> txtconvertir.append("5"));
+        btn6.setOnClickListener(v -> txtconvertir.append("6"));
+        btn7.setOnClickListener(v -> txtconvertir.append("7"));
+        btn8.setOnClickListener(v -> txtconvertir.append("8"));
+        btn9.setOnClickListener(v -> txtconvertir.append("9"));
+        btnpunto.setOnClickListener(v -> txtconvertir.append("."));
+
+        // Botón de retroceso
+        btnatras.setOnClickListener(v -> {
+            String texto = txtconvertir.getText().toString();
+            if (!texto.isEmpty()) {
+                txtconvertir.setText(texto.substring(0, texto.length() - 1));
+                txtconvertir.setSelection(txtconvertir.getText().length());
+            }
+        });
+
+        // Botón de punto validaciones
+        btnpunto.setOnClickListener(v -> {
+            validacionPunto();
+        });
+
+
         sporigen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
@@ -98,6 +139,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
             }
+        });
+
+
+        sporigen.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
+                String monedaOrigen = sporigen.getSelectedItem().toString();
+                ImageView imgOrigen = findViewById(R.id.imgOrigen);
+
+                if (banderas.containsKey(monedaOrigen)) {
+                    imgOrigen.setImageResource(banderas.get(monedaOrigen));
+                } else {
+                    imgOrigen.setImageResource(0);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
 
         spdestino.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -252,7 +311,32 @@ public class MainActivity extends AppCompatActivity {
             txtresult.setTextColor(Color.RED);
         }
         if (resultado > 10000){
-            Toast.makeText(MainActivity.this, getString(R.string.e_advert_monto_alto), Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, R.string.e_advert_monto_alto, Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void validacionPunto(){
+        String texto = txtconvertir.getText().toString();
+
+        // Si el campo está vacío, no dejar comenzar con punto
+        if (texto.isEmpty()) {
+            Toast.makeText(MainActivity.this, R.string.e_comenzar_punto, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Si ya contiene un punto, no dejar agregar otro
+        if (texto.contains(".")) {
+            Toast.makeText(MainActivity.this, R.string.e_tiene_punto, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Si termina con un punto (raro pero posible), no permitir
+        if (texto.endsWith(".")) {
+            Toast.makeText(MainActivity.this, R.string.e_termina_punto, Toast.LENGTH_LONG).show();
+            return;
+        }
+
+        // Si pasa todas las validaciones, agregar punto
+        txtconvertir.append(".");
     }
 }
