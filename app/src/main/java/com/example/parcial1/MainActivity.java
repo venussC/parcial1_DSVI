@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -44,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
 
     int posicion = 0;
     HashMap<String, Double> tasas = new HashMap<>();
+    HashMap<String, Integer> banderas = new HashMap<>();
     static final String API_URL = "https://api.exchangerate-api.com/v4/latest/USD";
 
     @Override
@@ -62,6 +64,13 @@ public class MainActivity extends AppCompatActivity {
         btnconvertir = findViewById(R.id.btnconvertir);
         sporigen = findViewById(R.id.sporigen);
         spdestino = findViewById(R.id.spdestino);
+
+
+        banderas.put("USD", R.drawable.flag_usa);
+        banderas.put("EUR", R.drawable.flag_ue);
+        banderas.put("GBP", R.drawable.flag_ru);
+        banderas.put("JPY", R.drawable.flag_jp);
+        banderas.put("COP", R.drawable.flag_col);
 
         tasas.put("USD", 1.0);
         tasas.put("EUR", 0.85);
@@ -88,12 +97,18 @@ public class MainActivity extends AppCompatActivity {
         spdestino.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int i, long id) {
-                posicion = i;
+                String monedaDestino = spdestino.getSelectedItem().toString();
+                ImageView imgbandera = findViewById(R.id.imageView);
+
+                if (banderas.containsKey(monedaDestino)) {
+                    imgbandera.setImageResource(banderas.get(monedaDestino));
+                } else {
+                    imgbandera.setImageResource(0); // sin imagen si no hay bandera
+                }
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-            }
+            public void onNothingSelected(AdapterView<?> parent) { }
         });
 
         btnconvertir.setOnClickListener(new View.OnClickListener() {

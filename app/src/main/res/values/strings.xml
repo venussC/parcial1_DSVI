@@ -13,4 +13,5 @@
     <string name="e_campo_vacio">Please enter all fields</string>
     <string name="e_monedas_iguales" translatable="false">Currencies must be different</string>
     <string name="e_advert_monto_alto">Warning: High amount</string>
+
     </resources>
