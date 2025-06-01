@@ -15,4 +15,9 @@
     <string name="e_campo_vacio">Veuillez remplir tous les champs</string>
     <string name="e_monedas_iguales">Les devises doivent être différentes</string>
     <string name="e_advert_monto_alto">Avertissement : Montant élevé</string>
+    <string name="e_comenzar_punto">La valeur ne peut pas commencer par un point</string>
+    <string name="e_tiene_punto">La valeur contient déjà un point</string>
+    <string name="e_termina_punto">La valeur ne peut pas se terminer par un point</string>
+    <string name="from">De</string>
+    <string name="to">À</string>
 </resources>

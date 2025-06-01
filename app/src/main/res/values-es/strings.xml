@@ -14,4 +14,9 @@
     <string name="e_campo_vacio">Ingrese todos los datos</string>
     <string name="e_monedas_iguales">Las monedas son iguales</string>
     <string name="e_advert_monto_alto">Advertencia: monto alto</string>
+    <string name="e_comenzar_punto">El valor no puede comenzar con punto</string>
+    <string name="e_tiene_punto">El valor ya contiene un punto</string>
+    <string name="e_termina_punto">El valor no puede terminar con un punto</string>
+    <string name="from">De</string>
+    <string name="to">A</string>
 </resources>
