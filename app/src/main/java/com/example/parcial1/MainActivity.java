@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar); // Agregas esto
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("");
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -109,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
                 if (banderas.containsKey(monedaDestino)) {
                     imgbandera.setImageResource(banderas.get(monedaDestino));
                 } else {
-                    imgbandera.setImageResource(0); // sin imagen si no hay bandera
+                    imgbandera.setImageResource(0);
                 }
             }
 
@@ -167,7 +167,7 @@ public class MainActivity extends AppCompatActivity {
                 .setMessage("¿Estás seguro que deseas salir de la app?")
                 .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        finish(); // Cierra la actividad
+                        finish();
                     }
                 })
                 .setNegativeButton("No", null)
