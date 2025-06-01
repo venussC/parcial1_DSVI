@@ -3,6 +3,7 @@
     <string name="app_name">Parcial1</string>
     <string name="titulo">Conversión de moneda</string>
     <array name="arrmoneda">
+        <item>SELECCIONE</item>
         <item>USD</item>
         <item>EUR</item>
         <item>GBP</item>
@@ -11,6 +12,8 @@
     </array>
     <string name="hinted">Monto a convertir</string>
     <string name="button">Convertir</string>
+    <string name="seleccione">Seleccione</string>
+    <string name="e_debe_seleccionar_divisa">Debe seleccionar una divisa válida.</string>
     <string name="e_campo_vacio">Ingrese todos los datos</string>
     <string name="e_monedas_iguales">Las monedas son iguales</string>
     <string name="e_advert_monto_alto">Advertencia: monto alto</string>

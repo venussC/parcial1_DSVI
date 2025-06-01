@@ -56,9 +56,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar); // Agregas esto
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("");
+        getSupportActionBar().setTitle("MoneyShift");
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                 if (banderas.containsKey(monedaDestino)) {
                     imgbandera.setImageResource(banderas.get(monedaDestino));
                 } else {
-                    imgbandera.setImageResource(0);
+                    imgbandera.setImageResource(0); // sin imagen si no hay bandera
                 }
             }
 
@@ -180,13 +180,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                if(txtconvertir.getText().toString().equals("")) {
-                    Snackbar.make(v, getString(R.string.e_campo_vacio), Snackbar.LENGTH_LONG).show();
+                String origen = sporigen.getSelectedItem().toString();
+                String destino = spdestino.getSelectedItem().toString();
 
-                }else if (sporigen.getSelectedItem().toString().equals(spdestino.getSelectedItem().toString())) {
+                if (txtconvertir.getText().toString().isEmpty()) {
+                    Snackbar.make(v, getString(R.string.e_campo_vacio), Snackbar.LENGTH_LONG).show();
+                } else if (origen.equals(destino)) {
                     Snackbar.make(v, getString(R.string.e_monedas_iguales), Snackbar.LENGTH_LONG).show();
-                } else{
-                    convert2 pasar = new convert2(sporigen.getSelectedItem().toString(), spdestino.getSelectedItem().toString(), Double.parseDouble(txtconvertir.getText().toString()), tasas);
+                } else if (origen.equals(getString(R.string.seleccione)) || destino.equals(getString(R.string.seleccione))) {
+                    Snackbar.make(v, getString(R.string.e_debe_seleccionar_divisa), Snackbar.LENGTH_LONG).show();
+                } else {
+                    convert2 pasar = new convert2(origen, destino, Double.parseDouble(txtconvertir.getText().toString()), tasas);
                     txtresult.setText(String.format("%.2f", pasar.convertidorcompleto()));
                     cambiocolor(pasar);
                 }

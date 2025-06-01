@@ -2,6 +2,7 @@
     <string name="app_name">Parcial1</string>
     <string name="titulo">Currency conversion</string>
     <array name="arrmoneda">
+        <item>SELECT</item>
         <item>USD</item>
         <item>EUR</item>
         <item>GBP</item>
@@ -10,6 +11,8 @@
     </array>
     <string name="hinted">Amount to convert</string>
     <string name="button">Convert</string>
+    <string name="seleccione">Select</string>
+    <string name="e_debe_seleccionar_divisa">You must select a valid currency.</string>
     <string name="e_campo_vacio">Please enter all fields</string>
     <string name="e_monedas_iguales" translatable="false">Currencies must be different</string>
     <string name="e_advert_monto_alto">Warning: High amount</string>
