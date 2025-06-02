@@ -184,11 +184,11 @@ public class MainActivity extends AppCompatActivity {
                 String destino = spdestino.getSelectedItem().toString();
 
                 if (txtconvertir.getText().toString().isEmpty()) {
-                    Snackbar.make(v, getString(R.string.e_campo_vacio), Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(v, R.string.e_campo_vacio, Snackbar.LENGTH_LONG).show();
                 } else if (origen.equals(destino)) {
-                    Snackbar.make(v, getString(R.string.e_monedas_iguales), Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(v, R.string.e_monedas_iguales, Snackbar.LENGTH_LONG).show();
                 } else if (origen.equals(getString(R.string.seleccione)) || destino.equals(getString(R.string.seleccione))) {
-                    Snackbar.make(v, getString(R.string.e_debe_seleccionar_divisa), Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(v, R.string.e_debe_seleccionar_divisa, Snackbar.LENGTH_LONG).show();
                 } else {
                     convert2 pasar = new convert2(origen, destino, Double.parseDouble(txtconvertir.getText().toString()), tasas);
                     txtresult.setText(String.format("%.2f", pasar.convertidorcompleto()));
