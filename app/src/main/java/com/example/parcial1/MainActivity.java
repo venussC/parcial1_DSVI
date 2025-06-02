@@ -226,14 +226,14 @@ public class MainActivity extends AppCompatActivity {
 
     private void mostrarDialogoSalir() {
         new AlertDialog.Builder(this)
-                .setTitle("Confirmación")
-                .setMessage("¿Estás seguro que deseas salir de la app?")
-                .setPositiveButton("Sí", new DialogInterface.OnClickListener() {
+                .setTitle(getString(R.string.titulo_salir))
+                .setMessage(getString(R.string.mensaje_salir))
+                .setPositiveButton(getString(R.string.si), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         finish();
                     }
                 })
-                .setNegativeButton("No", null)
+                .setNegativeButton(getString(R.string.no), null)
                 .show();
     }
 

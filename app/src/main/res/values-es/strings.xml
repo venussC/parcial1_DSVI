@@ -15,6 +15,10 @@
     <string name="seleccione">Seleccione</string>
     <string name="e_debe_seleccionar_divisa">Debe seleccionar una divisa válida.</string>
     <string name="e_campo_vacio">Ingrese todos los datos</string>
+    <string name="titulo_salir">Confirmación</string>
+    <string name="mensaje_salir">¿Estás seguro que deseas salir de la app?</string>
+    <string name="si">Sí</string>
+    <string name="no">No</string>
     <string name="e_monedas_iguales">Las monedas son iguales</string>
     <string name="e_advert_monto_alto">Advertencia: monto alto</string>
     <string name="e_comenzar_punto">El valor no puede comenzar con punto</string>

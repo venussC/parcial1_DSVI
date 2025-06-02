@@ -16,6 +16,10 @@
     <string name="seleccione">Sélectionner</string>
     <string name="e_debe_seleccionar_divisa">Vous devez sélectionner une devise valide.</string>
     <string name="e_monedas_iguales">Les devises doivent être différentes</string>
+    <string name="titulo_salir">Confirmation</string>
+    <string name="mensaje_salir">Êtes-vous sûr de vouloir quitter l\'application ?</string>
+    <string name="si">Oui</string>
+    <string name="no">Non</string>
     <string name="e_advert_monto_alto">Avertissement : Montant élevé</string>
     <string name="e_comenzar_punto">La valeur ne peut pas commencer par un point</string>
     <string name="e_tiene_punto">La valeur contient déjà un point</string>
