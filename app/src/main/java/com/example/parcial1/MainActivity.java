@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar); // Agregas esto
+        androidx.appcompat.widget.Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle("MoneyShift");
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -168,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
                 if (banderas.containsKey(monedaDestino)) {
                     imgbandera.setImageResource(banderas.get(monedaDestino));
                 } else {
-                    imgbandera.setImageResource(0); // sin imagen si no hay bandera
+                    imgbandera.setImageResource(0);
                 }
             }
 
@@ -322,25 +322,25 @@ public class MainActivity extends AppCompatActivity {
     private void validacionPunto(){
         String texto = txtconvertir.getText().toString();
 
-        // Si el campo está vacío, no dejar comenzar con punto
+
         if (texto.isEmpty()) {
             Toast.makeText(MainActivity.this, R.string.e_comenzar_punto, Toast.LENGTH_LONG).show();
             return;
         }
 
-        // Si ya contiene un punto, no dejar agregar otro
+
         if (texto.contains(".")) {
             Toast.makeText(MainActivity.this, R.string.e_tiene_punto, Toast.LENGTH_LONG).show();
             return;
         }
 
-        // Si termina con un punto (raro pero posible), no permitir
+
         if (texto.endsWith(".")) {
             Toast.makeText(MainActivity.this, R.string.e_termina_punto, Toast.LENGTH_LONG).show();
             return;
         }
 
-        // Si pasa todas las validaciones, agregar punto
+
         txtconvertir.append(".");
     }
 }
