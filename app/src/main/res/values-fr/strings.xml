@@ -10,8 +10,7 @@
         <item>JPY</item>
         <item>COP</item>
     </array>
-    <string name="hinted">Montant à convertir</string>
-    <string name="button">Convertir</string>
+
     <string name="e_campo_vacio">Veuillez remplir tous les champs</string>
     <string name="seleccione">Sélectionner</string>
     <string name="e_debe_seleccionar_divisa">Vous devez sélectionner une devise valide.</string>
