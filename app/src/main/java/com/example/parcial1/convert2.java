@@ -50,13 +50,6 @@ public class convert2 {
 
 
 
-    //public void setTasas(HashMap<String, Double> nuevastasas) {
-        //this.tasas = nuevastasas;
-    //}
-
-    //public HashMap<String, Double> getTasas() {
-       // return this.tasas;
-   // }
 
 }
 

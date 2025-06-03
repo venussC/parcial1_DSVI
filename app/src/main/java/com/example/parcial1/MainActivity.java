@@ -102,7 +102,7 @@ public class MainActivity extends AppCompatActivity {
         sporigen.setAdapter((adaptadormonedas));
         spdestino.setAdapter((adaptadormonedas));
 
-        // Botones numéricos y punto
+        
         btn0.setOnClickListener(v -> txtconvertir.append("0"));
         btn1.setOnClickListener(v -> txtconvertir.append("1"));
         btn2.setOnClickListener(v -> txtconvertir.append("2"));
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         btn9.setOnClickListener(v -> txtconvertir.append("9"));
         btnpunto.setOnClickListener(v -> txtconvertir.append("."));
 
-        // Botón de retroceso
+
         btnatras.setOnClickListener(v -> {
             String texto = txtconvertir.getText().toString();
             if (!texto.isEmpty()) {
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Botón de punto validaciones
+
         btnpunto.setOnClickListener(v -> {
             validacionPunto();
         });
