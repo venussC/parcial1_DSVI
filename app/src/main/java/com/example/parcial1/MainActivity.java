@@ -92,17 +92,17 @@ public class MainActivity extends AppCompatActivity {
         banderas.put("COP", R.drawable.flag_col);
 
         tasas.put("USD", 1.0);
-        tasas.put("EUR", 0.85);
-        tasas.put("GBP", 0.73);
-        tasas.put("JPY", 110.0);
-        tasas.put("PAB", 1.0);
+        tasas.put("EUR", 0.88);
+        tasas.put("GBP", 0.74);
+        tasas.put("JPY", 143.93);
+        tasas.put("COP", 4154.36);
 
         String[] arrmoneda = getResources().getStringArray(R.array.arrmoneda);
         ArrayAdapter<String> adaptadormonedas = new ArrayAdapter<>(this, androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, arrmoneda);
         sporigen.setAdapter((adaptadormonedas));
         spdestino.setAdapter((adaptadormonedas));
 
-        // Botones numéricos y punto
+        
         btn0.setOnClickListener(v -> txtconvertir.append("0"));
         btn1.setOnClickListener(v -> txtconvertir.append("1"));
         btn2.setOnClickListener(v -> txtconvertir.append("2"));
@@ -115,7 +115,7 @@ public class MainActivity extends AppCompatActivity {
         btn9.setOnClickListener(v -> txtconvertir.append("9"));
         btnpunto.setOnClickListener(v -> txtconvertir.append("."));
 
-        // Botón de retroceso
+
         btnatras.setOnClickListener(v -> {
             String texto = txtconvertir.getText().toString();
             if (!texto.isEmpty()) {
@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        // Botón de punto validaciones
+
         btnpunto.setOnClickListener(v -> {
             validacionPunto();
         });
@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
                 .setMessage(getString(R.string.mensaje_salir))
                 .setPositiveButton(getString(R.string.si), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        finish();
+                        finishAffinity();
                     }
                 })
                 .setNegativeButton(getString(R.string.no), null)
