@@ -230,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
                 .setMessage(getString(R.string.mensaje_salir))
                 .setPositiveButton(getString(R.string.si), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        finish();
+                        finishAffinity();
                     }
                 })
                 .setNegativeButton(getString(R.string.no), null)

@@ -25,4 +25,5 @@
     <string name="e_termina_punto">La valeur ne peut pas se terminer par un point</string>
     <string name="from">De</string>
     <string name="to">À</string>
+    <string name="btnsplash">Prêt ?</string>
 </resources>

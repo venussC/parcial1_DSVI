@@ -24,4 +24,6 @@
     <string name="e_termina_punto">The value cannot end with a dot</string>
     <string name="from">From</string>
     <string name="to">To</string>
-    </resources>
+
+    <string name="btnsplash">Ready?</string>
+</resources>

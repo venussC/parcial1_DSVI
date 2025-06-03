@@ -33,7 +33,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="sans-serif-medium"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/titulo"
             android:textColor="#666666"
             android:textSize="20sp" />
@@ -49,11 +49,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/poppins"
             android:text="From"
-            android:textSize="16sp"
             android:textColor="#666666"
-            android:fontFamily="sans-serif-medium"
-            android:layout_marginBottom="10dp" />
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -73,7 +73,7 @@
                 android:background="@null"
                 android:cursorVisible="true"
                 android:focusable="false"
-                android:fontFamily="sans-serif"
+                android:fontFamily="@font/poppins"
                 android:hint="0.00"
                 android:inputType="numberDecimal"
                 android:textColor="#333333"
@@ -139,11 +139,11 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:fontFamily="@font/poppins"
             android:text="To"
-            android:textSize="16sp"
             android:textColor="#666666"
-            android:fontFamily="sans-serif-medium"
-            android:layout_marginBottom="10dp" />
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -160,9 +160,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="sans-serif"
-                android:textSize="24sp"
-                android:textColor="#333333" />
+                android:fontFamily="@font/poppins"
+                android:textColor="#333333"
+                android:textSize="24sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
